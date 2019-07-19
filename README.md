@@ -2,26 +2,26 @@
 
 A simple guestbook webapp written in java using [Spring Boot](https://spring.io/projects/spring-boot).
 
+# Run
+
+* In dev environment: `gradle bootRun`
+* In prod environment: Create runnable jar (see [Build](#Build)), and start it with `java -Dspring.profiles.active=prod -jar app.jar`
+
 # Build
 
 Following procedure describes how to build a Docker Image and push it to the [registry](https://gitlab.com/mn94/guestbook/container_registry).
 
-*Assuming your working directory is the project root.*
+*Assuming you're working directory is the project root.*
 
 1. Build Runnable Jar: `gradle bootJar`
 2. Build Docker Image: `docker build -t registry.gitlab.com/mn94/guestbook:latest .`
 3. (optional) Login to Registry: `docker login registry.gitlab.com`
 4. Push to Registry: `docker push registry.gitlab.com/mn94/guestbook:latest`
 
-# Run
-
-* In dev environment: `gradle bootRun`
-* In prod environment: Create runnable jar (see [Build](#Build)), and start it with `java -Dspring.profiles.active=prod -jar app.jar`
-
 # Database
 
-* The DDL for creating the schema can be found in project root `schema.sql`.
-* To regenerate `schema.sql` based on the JPA entities follow [this](https://stackoverflow.com/questions/36966337/how-to-generate-a-ddl-creation-script-with-a-modern-spring-boot-data-jpa-and-h) approach.
+* The schema DDL can be found in the project root `schema.sql`.
+* To regenerate the `schema.sql` based on the JPA entities follow [this](https://stackoverflow.com/questions/36966337/how-to-generate-a-ddl-creation-script-with-a-modern-spring-boot-data-jpa-and-h) approach.
 
 # Setup Application Stack
 
@@ -40,7 +40,7 @@ Before deploying the webapp, the application stack needs to be setup properly. T
 
 Following procedure describes how to deploy the guestbook webapp using docker. The same procedure applies when deploying new versions of the app. 
 
-*Make sure application stack has been [setup](#setup-application-stack) and the Docker Image has been [built](#Build).*
+*Make sure the application stack has been [setup](#setup-application-stack) and the Docker Image has been [built](#Build).*
 
 1. Delete old container (if exists): `docker container stop guestbook && docker container rm guestbook || true`
 2. (optional) Login to Registry: `docker login registry.gitlab.com`
